@@ -1,4 +1,7 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -47,7 +50,7 @@ public class Main
                 }
             }
         }
-        writeInFile(bst);
+        bst.writeBST();
     }
 
     /**
@@ -85,7 +88,7 @@ public class Main
                     System.out.print("Enter the title :");
                     if (sc.hasNextLine())
                         movie.setTitle(sc.nextLine());
-                        bst.contains(movie);
+                    bst.contains(movie);
             }
         }
     }
@@ -96,14 +99,22 @@ public class Main
      */
     private static void readerFile(BST bst){
         File file = new File("movies.txt");
+        ArrayList<String> list = new ArrayList<String>();
 
         try {
             Scanner sc = new Scanner(file);
 
             while (sc.hasNextLine()) {
-                bst.add(new Movie(sc.nextLine()));
+                list.add(sc.nextLine());
             }
             sc.close();
+            Collections.shuffle(list, new Random(System.nanoTime()));
+
+            for (String movie:
+                 list) {
+                bst.add(new Movie(movie));
+            }
+
         }
         catch (FileNotFoundException e) {
             System.out.println("We didnt find your file");
@@ -177,48 +188,5 @@ public class Main
         }
 
         bst.add(movie);
-    }
-
-    /**
-     * Write in a file all the contact of the list
-     */
-    private static void writeInFile(BST bst){
-        BufferedWriter bw = null;
-        FileWriter fw = null;
-
-        try {
-
-            fw = new FileWriter("addresses.txt");
-            bw = new BufferedWriter(fw);
-
-            for (int i = 0; i < size(); i++){
-                String str = "";
-                str += getNode(i).data.getFirstName() + ",";
-                str += getNode(i).data.getLastName() + ",";
-                str += getNode(i).data.getPhoneNumber() + ",";
-                str += getNode(i).data.getAddress() + ",";
-                str += getNode(i).data.getCity() + ",";
-                str += getNode(i).data.getZipCode() + "\n";
-                bw.write(str);
-            }
-
-            System.out.println("addresses.txt has been updated!");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-
-            try {
-
-                if (bw != null)
-                    bw.close();
-
-                if (fw != null)
-                    fw.close();
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
     }
 }

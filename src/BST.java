@@ -1,3 +1,4 @@
+import java.io.*;
 /**
  * Class BSY
  */
@@ -61,7 +62,7 @@ public class BST {
 
     /**
      * Add node BST
-     * @param d Word
+     * @param d Movie
      * @param n Node
      * @return Node
      */
@@ -119,7 +120,7 @@ public class BST {
 
     /**
      * Remove node
-     * @param d Word
+     * @param d Movie
      * @param n Node
      * @return Node
      */
@@ -149,8 +150,8 @@ public class BST {
     }
 
     /**
-     * Contains word
-      * @param d Word
+     * Contains Movie
+      * @param d Movie
      * @return true or false
      */
     public boolean contains( Movie d ) {
@@ -163,8 +164,8 @@ public class BST {
     }
 
     /**
-     * Contains word
-     * @param d Word
+     * Contains Movie
+     * @param d Movie
      * @param n Node
      * @return true or false
      */
@@ -188,5 +189,63 @@ public class BST {
                 return contains( d, n.right );
             }
         }
+    }
+
+    /**
+     * Print the tree
+     */
+    public void writeBST() {
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+
+        try {
+
+            fw = new FileWriter("movies.txt");
+            bw = new BufferedWriter(fw);
+
+            if( isEmpty() ) {
+                System.out.println("No items to write");
+            } else {
+                writeBST( root, bw );
+            }
+
+            System.out.println("addresses.txt has been updated!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+
+            try {
+
+                if (bw != null)
+                    bw.close();
+
+                if (fw != null)
+                    fw.close();
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Print the tree
+     * @param n Node
+     */
+    private void writeBST( Node n, BufferedWriter bw ) throws IOException {
+        //go down left tree
+        if ( n.right != null ) {
+            writeBST( n.right, bw );
+        }
+        //go down right tree
+        writeBST(n.data, bw);
+        if( n.left != null ) {
+            writeBST( n.left, bw );
+        }
+    }
+
+    private void writeBST(Movie movie, BufferedWriter bw) throws IOException {
+        bw.write(movie.toString());
     }
 }
