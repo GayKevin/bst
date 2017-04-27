@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Kevin Gay on 26/04/2017.
@@ -27,22 +28,31 @@ public class Movie {
     /**
      * Audience Rating
      */
-    private int audienceRating;
+    private double audienceRating;
     /**
      * Actors
      */
-    private ArrayList<String> actors;
+    private ArrayList<String> actors = new ArrayList<String>();
 
     /**
      * Constructor movie
-     * @param title movie
-     * @param releaseYear movie
-     * @param rating movie
-     * @param lenght movie
-     * @param audienceRating movie
-     * @param actors movie
+     * @param str string
      */
-    public Movie(String title, int releaseYear, String rating, int lenght, String audienceRating, ArrayList<String> actors){
+    public Movie(String str){
+        String[] split = str.split("/");
+
+        this.title = split[0];
+        this.releaseYear = Integer.parseInt(split[1]);
+        this.rating = split[2];
+        this.lenght = Integer.parseInt(split[3]);
+        this.audienceRating = Double.parseDouble(split[4]);
+
+        if (split.length > 5){
+            Collections.addAll(this.actors, split[5].split(","));
+        }
+    }
+
+    public Movie(){
 
     }
 
@@ -114,15 +124,15 @@ public class Movie {
      * Get the audiance rating
      * @return int
      */
-    public int getAudienceRating() {
+    public Double getAudienceRating() {
         return audienceRating;
     }
 
     /**
      * Set the audience rating
-     * @param audienceRating int
+     * @param audienceRating Double
      */
-    public void setAudienceRating(int audienceRating) {
+    public void setAudienceRating(Double audienceRating) {
         this.audienceRating = audienceRating;
     }
 
@@ -144,10 +154,33 @@ public class Movie {
 
     @Override
     public String toString() {
-        return super.toString();
+        int i = 0;
+        String str = "";
+
+        str += this.getTitle() + '/';
+        str += String.valueOf(this.getReleaseYear()) + '/';
+        str += this.getRating() + '/';
+        str += String.valueOf(this.getLenght()) + '/';
+        str += String.valueOf(this.getAudienceRating()) + '/';
+
+
+        for (String actor : this.actors) {
+            i++;
+            str += actor;
+            if (i != this.actors.size())
+                str += ',';
+        }
+
+        str += '\n';
+
+        return str;
     }
 
     public int compareTo(Movie movie){
+        return movie.getTitle().compareTo(this.getTitle());
+    }
 
+    public int compareTo(String movie){
+        return this.getTitle().compareTo(movie);
     }
 }

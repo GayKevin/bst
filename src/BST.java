@@ -10,7 +10,7 @@ public class BST {
         /**
          * Data node
          */
-        private Word data;
+        private Movie data;
         /**
          * Left node
          */
@@ -24,7 +24,7 @@ public class BST {
          * Constructor node
          * @param d
          */
-        public Node( Word d ) {
+        public Node( Movie d ) {
             data = d;
             left = null;
             right = null;
@@ -55,7 +55,7 @@ public class BST {
      * Add Node
      * @param d
      */
-    public void add( Word d ) {
+    public void add( Movie d ) {
         root = add( d, root );
     }
 
@@ -65,14 +65,12 @@ public class BST {
      * @param n Node
      * @return Node
      */
-    private Node add( Word d, Node n ) {
+    private Node add( Movie d, Node n ) {
         if( n == null ) {
             return new Node( d );
         } else {
             if( d.compareTo(n.data) < 0 ) {
                 n.left = add( d, n.left );
-            } else if (d.compareTo(n.data) == 0) {
-                n.data.setNbr();
             } else {
                 n.right = add( d, n.right );
             }
@@ -97,13 +95,13 @@ public class BST {
      */
     private void printBST( Node n ) {
         //go down left tree
-        if ( n.left != null ) {
-            printBST( n.left );
+        if ( n.right != null ) {
+            printBST( n.right );
         }
         //go down right tree
         System.out.print( n.data.toString() + ' ');
-        if( n.right != null ) {
-            printBST( n.right );
+        if( n.left != null ) {
+            printBST( n.left);
         }
     }
 
@@ -111,7 +109,7 @@ public class BST {
      * Remove Node
       * @param d Wors
      */
-    public void remove( Word d ) {
+    public void remove( Movie d ) {
         if ( root == null ) {
             System.out.println( "No items to remove" );
         } else {
@@ -125,7 +123,7 @@ public class BST {
      * @param n Node
      * @return Node
      */
-    private Node remove( Word d, Node n ) {
+    private Node remove( Movie d, Node n ) {
         if( n == null ) {
             return n;
         }
@@ -155,7 +153,7 @@ public class BST {
       * @param d Word
      * @return true or false
      */
-    public boolean contains( Word d ) {
+    public boolean contains( String d ) {
         if ( root == null ) {
             System.out.println( "No items to search" );
             return false;
@@ -170,12 +168,12 @@ public class BST {
      * @param n Node
      * @return true or false
      */
-    private boolean contains( Word d, Node n ) {
-        if ( d.compareTo(n.data) == 0 ) {
+    private boolean contains( String d, Node n ) {
+        if ( n.data.compareTo(d) == 0 ) {
             System.out.println(n.data.toString());
             return true;
         }
-        if ( d.compareTo(n.data) < 0 ) {
+        if ( n.data.compareTo(d) < 0 ) {
             if ( n.left == null ) {
                 System.out.println( "Item Not Found" );
                 return false;
