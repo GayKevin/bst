@@ -153,7 +153,7 @@ public class BST {
       * @param d Word
      * @return true or false
      */
-    public boolean contains( String d ) {
+    public boolean contains( Movie d ) {
         if ( root == null ) {
             System.out.println( "No items to search" );
             return false;
@@ -168,12 +168,12 @@ public class BST {
      * @param n Node
      * @return true or false
      */
-    private boolean contains( String d, Node n ) {
-        if ( n.data.compareTo(d) == 0 ) {
-            System.out.println(n.data.toString());
+    private boolean contains( Movie d, Node n ) {
+        if ( d.compareTo(n.data) == 0 ) {
+            System.out.print(n.data.toString());
             return true;
         }
-        if ( n.data.compareTo(d) < 0 ) {
+        if ( d.compareTo(n.data) < 0 ) {
             if ( n.left == null ) {
                 System.out.println( "Item Not Found" );
                 return false;

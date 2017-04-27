@@ -20,7 +20,7 @@ public class Movie {
     /**
      * Rating age
      */
-    private String rating;
+    private String rating = "Unknown";
     /**
      * Lenght in minutes
      */
