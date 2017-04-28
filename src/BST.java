@@ -1,4 +1,7 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class BSY
  */
@@ -154,10 +157,10 @@ public class BST {
       * @param d Movie
      * @return true or false
      */
-    public boolean contains( Movie d ) {
+    public Movie contains( Movie d ) {
         if ( root == null ) {
             System.out.println( "No items to search" );
-            return false;
+            return null;
         } else {
             return contains( d, root );
         }
@@ -169,22 +172,21 @@ public class BST {
      * @param n Node
      * @return true or false
      */
-    private boolean contains( Movie d, Node n ) {
+    private Movie contains( Movie d, Node n ) {
         if ( d.compareTo(n.data) == 0 ) {
-            System.out.print(n.data.toString());
-            return true;
+            return n.data;
         }
         if ( d.compareTo(n.data) < 0 ) {
             if ( n.left == null ) {
                 System.out.println( "Item Not Found" );
-                return false;
+                return null;
             } else {
                 return contains( d, n.left );
             }
         } else {
             if ( n.right == null ) {
                 System.out.println( "Item Not Found" );
-                return false;
+                return null;
             } else {
                 return contains( d, n.right );
             }
@@ -247,5 +249,84 @@ public class BST {
 
     private void writeBST(Movie movie, BufferedWriter bw) throws IOException {
         bw.write(movie.toString());
+    }
+
+    public ArrayList<Movie> search(String rating){
+        ArrayList<Movie> list = new ArrayList<Movie>();
+
+        if ( root == null ) {
+            System.out.println( "No items to search" );
+            return null;
+        } else {
+            return search( rating, root, list );
+        }
+    }
+
+    private ArrayList<Movie> search(String rating, Node n, ArrayList<Movie> list){
+        //go down left tree
+        if ( n.right != null ) {
+            search( rating, n.right , list);
+        }
+        if ( rating.equals(n.data.getRating())) {
+            list.add(n.data);
+        }
+        //go down right tree
+        if( n.left != null ) {
+            search( rating, n.left , list);
+        }
+        return list;
+    }
+
+    public ArrayList<Movie> search(int releaseYear){
+        ArrayList<Movie> list = new ArrayList<Movie>();
+
+        if ( root == null ) {
+            System.out.println( "No items to search" );
+            return null;
+        } else {
+            return search( releaseYear, root, list );
+        }
+    }
+
+    private ArrayList<Movie> search(int releaseYear, Node n, ArrayList<Movie> list){
+        //go down left tree
+        if ( n.right != null ) {
+            search( releaseYear, n.right , list);
+        }
+        if ( releaseYear / 10 == n.data.getReleaseYear() / 10) {
+            list.add(n.data);
+        }
+        //go down right tree
+        if( n.left != null ) {
+            search( releaseYear, n.left , list);
+        }
+        return list;
+    }
+
+
+    public ArrayList<Movie> search(double rating){
+        ArrayList<Movie> list = new ArrayList<Movie>();
+
+        if ( root == null ) {
+            System.out.println( "No items to search" );
+            return null;
+        } else {
+            return search( rating, root, list );
+        }
+    }
+
+    private ArrayList<Movie> search(double rating, Node n, ArrayList<Movie> list){
+        //go down left tree
+        if ( n.right != null ) {
+            search( rating, n.right , list);
+        }
+        if ( (int) rating == n.data.getAudienceRating().intValue()) {
+            list.add(n.data);
+        }
+        //go down right tree
+        if( n.left != null ) {
+            search( rating, n.left , list);
+        }
+        return list;
     }
 }

@@ -38,7 +38,7 @@ public class Main
                         bst.printBST();
                         break;
                     case "a":
-                        addContact(bst);
+                        addMovie(bst);
                         break;
                     case "r":
                         remove(bst);
@@ -74,7 +74,7 @@ public class Main
      */
     private static void search(BST bst){
         Scanner sc = new Scanner(System.in);
-        Movie movie = new Movie();
+        ArrayList<Movie> list = new ArrayList<Movie>();
 
         System.out.println("---- Search ----");
         System.out.println("Search by title : a");
@@ -83,13 +83,40 @@ public class Main
         System.out.println("Search by stars : d");
 
         if (sc.hasNextLine()){
+            Movie movie = new Movie();
             switch (sc.nextLine()){
                 case "a":
                     System.out.print("Enter the title :");
                     if (sc.hasNextLine())
                         movie.setTitle(sc.nextLine());
-                    bst.contains(movie);
+                    movie = bst.contains(movie);
+                    if (movie != null)
+                        System.out.println(movie.toString());
+                    break;
+                case "b":
+                    System.out.print("Enter the rating: ");
+                    if (sc.hasNextLine())
+                        list = bst.search(sc.nextLine());
+                case "c":
+                    System.out.print("Enter the year decade: ");
+                    if (sc.hasNextInt())
+                        list = bst.search(Integer.valueOf(sc.nextLine()));
+                case "d":
+                    System.out.print("Enter the audience rating: ");
+                    if (sc.hasNextDouble())
+                        list = bst.search(sc.nextDouble());
             }
+            printList(list);
+        }
+    }
+
+    private static void printList(ArrayList<Movie> list){
+        if (list.isEmpty())
+            return;
+
+        for (Movie movie:
+             list) {
+            System.out.print(movie.toString());
         }
     }
 
@@ -121,7 +148,11 @@ public class Main
         }
     }
 
-    private static void addContact(BST bst){
+    /**
+     * Add movie
+     * @param bst tree
+     */
+    private static void addMovie(BST bst){
         Movie movie = new Movie();
         Scanner sc = new Scanner(System.in);
         Boolean isWorking = true;
@@ -172,19 +203,29 @@ public class Main
 
 
         while (isWorking){
-            System.out.print("Enter the audience rating 1-10 or a to skip: ");
+            System.out.print("Enter the audience rating 1-10: ");
             if (sc.hasNextDouble()){
                 double audienceRating = sc.nextDouble();
                 if (audienceRating > 0 && audienceRating <= 10){
                     movie.setAudienceRating(audienceRating);
                     isWorking = false;
                 }
-                sc.nextLine();
             }
-            if (sc.hasNextLine())
-                if (sc.nextLine().equals("a"))
+            if (sc.nextLine().equals(""))
+                isWorking = false;
+        }
+
+        isWorking = true;
+
+        while(isWorking){
+            System.out.print("Enter the name of the actor");
+            if (sc.hasNextLine()){
+                String str = sc.nextLine();
+                if (str.equals(""))
                     isWorking = false;
-            sc.nextLine();
+                else
+                    movie.getActors().add(str);
+            }
         }
 
         bst.add(movie);
