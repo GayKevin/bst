@@ -323,7 +323,7 @@ public class BST {
         if ( n.right != null ) {
             search( releaseYear, n.right , list);
         }
-        if ( releaseYear / 10 == n.data.getReleaseYear() / 10) {
+        if ( releaseYear / 10  % 10 == n.data.getReleaseYear() / 10 % 10) {
             list.add(n.data);
         }
         //go down right tree

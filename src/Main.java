@@ -101,7 +101,7 @@ public class Main
                 case "c":
                     System.out.print("Enter the year decade: ");
                     if (sc.hasNextInt())
-                        list = bst.search(Integer.valueOf(sc.nextLine()));
+                        list = bst.search(Integer.parseInt(sc.nextLine()));
                     break;
                 case "d":
                     System.out.print("Enter the audience rating: ");
@@ -215,7 +215,7 @@ public class Main
         System.out.print("Enter the audience rating 1-10: ");
         if(sc.hasNextLine()) {
             str = sc.nextLine();
-            if (str.matches("([0-9]+\\.[0-9]*)"))
+            if (str.matches("([0-9]+\\.?[0-9]*)"))
                 movie.setAudienceRating(Double.parseDouble(str));
         }
 
