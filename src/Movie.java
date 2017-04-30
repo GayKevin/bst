@@ -177,7 +177,7 @@ public class Movie {
     }
 
     public int compareTo(Movie movie){
-        return movie.getTitle().compareTo(this.getTitle());
+        return this.getTitle().compareTo(movie.getTitle());
     }
 
     public int compareTo(String movie){

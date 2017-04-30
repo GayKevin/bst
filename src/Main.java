@@ -97,14 +97,17 @@ public class Main
                     System.out.print("Enter the rating: ");
                     if (sc.hasNextLine())
                         list = bst.search(sc.nextLine());
+                    break;
                 case "c":
                     System.out.print("Enter the year decade: ");
                     if (sc.hasNextInt())
                         list = bst.search(Integer.valueOf(sc.nextLine()));
+                    break;
                 case "d":
                     System.out.print("Enter the audience rating: ");
                     if (sc.hasNextDouble())
                         list = bst.search(sc.nextDouble());
+                    break;
             }
             printList(list);
         }
@@ -218,7 +221,7 @@ public class Main
         isWorking = true;
 
         while(isWorking){
-            System.out.print("Enter the name of the actor");
+            System.out.print("Enter the name of the actor: ");
             if (sc.hasNextLine()){
                 String str = sc.nextLine();
                 if (str.equals(""))

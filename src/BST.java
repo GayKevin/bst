@@ -73,7 +73,7 @@ public class BST {
         if( n == null ) {
             return new Node( d );
         } else {
-            if( d.compareTo(n.data) < 0 ) {
+            if( d.compareTo(n.data) > 0 ) {
                 n.left = add( d, n.left );
             } else {
                 n.right = add( d, n.right );
@@ -132,9 +132,9 @@ public class BST {
             return n;
         }
         //traverse to node & test number of children
-        if( d.compareTo(n.data) < 0 ) {
+        if( d.compareTo(n.data) > 0 ) {
             n.left = remove( d, n.left );
-        } else if( d.compareTo(n.data) > 0 ) {
+        } else if( d.compareTo(n.data) < 0 ) {
             n.right = remove( d, n.right );
         } else if( n.left != null && n.right != null ) {
             if( (int)( Math.random() * 2 ) == 0 ) {
@@ -176,7 +176,7 @@ public class BST {
         if ( d.compareTo(n.data) == 0 ) {
             return n.data;
         }
-        if ( d.compareTo(n.data) < 0 ) {
+        if ( d.compareTo(n.data) > 0 ) {
             if ( n.left == null ) {
                 System.out.println( "Item Not Found" );
                 return null;
@@ -211,7 +211,7 @@ public class BST {
                 writeBST( root, bw );
             }
 
-            System.out.println("addresses.txt has been updated!");
+            System.out.println("movies.txt has been updated!");
 
         } catch (IOException e) {
             e.printStackTrace();
