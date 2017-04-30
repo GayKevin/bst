@@ -133,7 +133,8 @@ public class Movie {
      * @param audienceRating Double
      */
     public void setAudienceRating(Double audienceRating) {
-        this.audienceRating = audienceRating;
+        if (audienceRating > 0 && audienceRating <= 10)
+            this.audienceRating = audienceRating;
     }
 
     /**
@@ -152,6 +153,10 @@ public class Movie {
         this.actors = actors;
     }
 
+    /**
+     * To String
+     * @return String
+     */
     @Override
     public String toString() {
         int i = 0;

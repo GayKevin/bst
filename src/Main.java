@@ -162,16 +162,22 @@ public class Main
         String[] rating = new String[]{"G", "PG", "PG-13", "R", "NC-17"};
 
         System.out.println("---- Add new Movie -----");
-        System.out.print("Enter the title: ");
 
-        if (sc.hasNextLine())
-            movie.setTitle(sc.nextLine());
+        String str = "";
+        while (str.equals("")) {
+            System.out.print("Enter the title: ");
+            if (sc.hasNextLine()) {
+                str = sc.nextLine();
+                movie.setTitle(str);
+            }
+        }
 
         System.out.print("Enter the release year or a for empty: ");
-
-        if(sc.hasNextInt())
-            movie.setReleaseYear(sc.nextInt());
-        sc.nextLine();
+        if(sc.hasNextLine()) {
+            str = sc.nextLine();
+            if (str.matches("[0-9]+"))
+                movie.setReleaseYear(Integer.parseInt(str));
+        }
 
         System.out.println("Select the rating");
         System.out.println("G: a");
@@ -200,22 +206,17 @@ public class Main
             }
 
         System.out.print("Time of the movie : ");
-        if (sc.hasNextInt())
-            movie.setLenght(sc.nextInt());
-        sc.nextLine();
+        if(sc.hasNextLine()) {
+            str = sc.nextLine();
+            if (str.matches("[0-9]+"))
+                movie.setLenght(Integer.parseInt(str));
+        }
 
-
-        while (isWorking){
-            System.out.print("Enter the audience rating 1-10: ");
-            if (sc.hasNextDouble()){
-                double audienceRating = sc.nextDouble();
-                if (audienceRating > 0 && audienceRating <= 10){
-                    movie.setAudienceRating(audienceRating);
-                    isWorking = false;
-                }
-            }
-            if (sc.nextLine().equals(""))
-                isWorking = false;
+        System.out.print("Enter the audience rating 1-10: ");
+        if(sc.hasNextLine()) {
+            str = sc.nextLine();
+            if (str.matches("([0-9]+\\.[0-9]*)"))
+                movie.setAudienceRating(Double.parseDouble(str));
         }
 
         isWorking = true;
@@ -223,7 +224,7 @@ public class Main
         while(isWorking){
             System.out.print("Enter the name of the actor: ");
             if (sc.hasNextLine()){
-                String str = sc.nextLine();
+                str = sc.nextLine();
                 if (str.equals(""))
                     isWorking = false;
                 else

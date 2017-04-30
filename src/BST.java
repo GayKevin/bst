@@ -247,10 +247,21 @@ public class BST {
         }
     }
 
+    /**
+     * Write BST
+     * @param movie movie
+     * @param bw BufferWrite
+     * @throws IOException exception
+     */
     private void writeBST(Movie movie, BufferedWriter bw) throws IOException {
         bw.write(movie.toString());
     }
 
+    /**
+     * Search rating
+     * @param rating rating
+     * @return ArrayList
+     */
     public ArrayList<Movie> search(String rating){
         ArrayList<Movie> list = new ArrayList<Movie>();
 
@@ -262,6 +273,13 @@ public class BST {
         }
     }
 
+    /**
+     * Search by Rating
+     * @param rating string
+     * @param n Node
+     * @param list Arraylist
+     * @return ArrayList
+     */
     private ArrayList<Movie> search(String rating, Node n, ArrayList<Movie> list){
         //go down left tree
         if ( n.right != null ) {
@@ -277,6 +295,11 @@ public class BST {
         return list;
     }
 
+    /**
+     * Search by Release year
+     * @param releaseYear int
+     * @return ArrayList
+     */
     public ArrayList<Movie> search(int releaseYear){
         ArrayList<Movie> list = new ArrayList<Movie>();
 
@@ -288,6 +311,13 @@ public class BST {
         }
     }
 
+    /**
+     * Search By release year
+     * @param releaseYear int
+     * @param n Node
+     * @param list ArrayList
+     * @return ArrayList
+     */
     private ArrayList<Movie> search(int releaseYear, Node n, ArrayList<Movie> list){
         //go down left tree
         if ( n.right != null ) {
@@ -303,7 +333,11 @@ public class BST {
         return list;
     }
 
-
+    /**
+     * Search by Rating
+     * @param rating double
+     * @return ArrayLisr
+     */
     public ArrayList<Movie> search(double rating){
         ArrayList<Movie> list = new ArrayList<Movie>();
 
@@ -315,6 +349,13 @@ public class BST {
         }
     }
 
+    /**
+     * Search By Ratinh
+     * @param rating double
+     * @param n Node
+     * @param list ArrayList
+     * @return ArrayList
+     */
     private ArrayList<Movie> search(double rating, Node n, ArrayList<Movie> list){
         //go down left tree
         if ( n.right != null ) {
